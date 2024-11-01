@@ -1,12 +1,18 @@
-body {
+
+body{
     margin: 0;
     padding: 0;
-    font-family: 'Jura';
 }
 
-body {
-    margin: 0;
-    padding: 0;
+main{
+    font-family: Jura;
+}
+
+.home-page{
+    font-family: Jura;
+}
+
+.login-page{
     font-family: Jura;
 }
 
@@ -63,4 +69,15 @@ body {
     background-color: #ffffff; 
     padding: 10px 20px;
     text-decoration: none;
+}
+
+
+#login-title {
+    align-items: center;
+    font-size: 35px;
+}
+
+#login-button {
+    outline: 1px solid;
+    align-items: center;
 }
