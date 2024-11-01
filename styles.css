@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Jura';
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Jura;
+}
+
+.navbar-logo {
+    font-size: 35px;
+    font-weight: 500;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.search-button {
+    outline: none;
+    border: none;
+    background: white;
+    padding: 10px;
+    font-family: Jura;
+    height: 35px;
+    }
+
+.search-input {
+    font-size: 16px;
+    font-family: Jura;
+    color:rgb(66, 66, 66);
+    margin-left: 20px;
+    width: max-content;
+}
+
+.center-link {
+    position: relative;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+
+.bg-img {
+    height: auto;
+    width: 100vw;
+
+} 
+
+.link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: black;
+    font-family: Jura;
+    background-color: #ffffff; 
+    padding: 10px 20px;
+    text-decoration: none;
+}
