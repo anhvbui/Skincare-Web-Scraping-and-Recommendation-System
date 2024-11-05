@@ -83,7 +83,7 @@ main{
 }
 
 .quiz-img{
-    top: 32%;
+    top: 40%;
     left: 50%;
     position: absolute;
     z-index: -1;
@@ -92,11 +92,22 @@ main{
     width: 90%;
 }
 
-
 #quiz-container{
     min-height: 50vh;
     width: 90%;
     z-index: 1;
+}
+
+.progress{
+    border-radius: 0px !important;
+}
+
+.progress .custom-progress{
+    color: beige;
+}
+
+.progress .custom-progress-bar {
+    background-color: #5c4545;
 }
 
 #step-container{
@@ -109,19 +120,35 @@ main{
 }
 
 .input-question {
-    display: inline-block;
+    display: block;
     border: 1.5px;
     padding: 5px;
     margin-top: 5px;
     margin-bottom: 10px;
 }
 
-.progress{
-    border-radius: 0px !important;
+.input-question .div{
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
+.form-check-input {
+    padding: 5px;
+}
+
+.form-check-label{
+    padding: 5px;
+}
+
+
+
+#step-container{
+    width: 55%;
+}
 .step {
     display: none;
+    padding-bottom: 10px;
 }
 
 .step.active {
@@ -141,16 +168,77 @@ main{
     float: left;
     background-color: #ffffff;
     padding: 5px 35px;
+    border: 1px solid black;
+    margin-top: 15px;
+    width: 150px;
+    
 }
 
 .next-btn{
     float: right;
     background-color: #ffffff;
     padding: 5px 35px;
+    border: 1px solid black;
+    margin-top: 15px;
+    width: 150px;
+    
 }   
    
 .submit-btn{
     float: right;
     background-color: #ffffff;
     padding: 5px 35px;
+    border: 1px solid black;
+    margin-top: 15px;
+    width: 150px;
+    
+}
+
+.result-page{
+    font-family: Jura;
+}
+#result-container{
+    color: white;
+}
+
+#result-list-title{
+    padding-top: 25px;
+}
+
+#product-cards{
+    background-color: #5c4545;
+}
+
+.card {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    width: auto;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-header {
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
+}
+  
+.card-title {
+    font-size: 1.25rem !important;
+    font-weight: bold !important;
+}
+
+.result-page-end{
+    position: relative;
+    margin-left: 400px;
+}
+.save-btn{
+    background-color: #ffffff;
+    padding: 5px 35px;
+    border: 1px solid black;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    width: 150px;
 }
