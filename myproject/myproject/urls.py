@@ -16,7 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app.views import homepage
+from app.views import loginPage
+from app.views import signup
+from app.views import test
+from app.views import logoutPage
+from app.views import skinQuiz
+from app.views import quizResult
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', homepage, name = "homepage"),
+    path('login/', loginPage, name = "login"),
+    path('logout/', logoutPage, name="logout"),
+    path('signup/', signup, name = "signup"),
+    path('test/', test, name = "test"),
+    path('skin-quiz/', skinQuiz, name = "skin-quiz"),
+    path('quiz-result/', quizResult, name = "quiz-result"),
 ]
