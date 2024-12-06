@@ -15,7 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.views.generic import RedirectView
+
+
+
+from django.urls import include, path, re_path
 from app.views import homepage
 from app.views import loginPage
 from app.views import signup
@@ -34,4 +38,6 @@ urlpatterns = [
     path('test/', test, name = "test"),
     path('skin-quiz/', skinQuiz, name = "skin-quiz"),
     path('quiz-result/', quizResult, name = "quiz-result"),
+    path('skin-quiz/quiz-result.html', quizResult, name='quiz-result'),
+    re_path(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
 ]

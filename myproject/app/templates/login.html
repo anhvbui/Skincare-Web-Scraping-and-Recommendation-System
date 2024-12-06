@@ -19,7 +19,6 @@
   </head>
 
 <body class="login-page">
-    <script src= '/src/js/main.js'></script>
     <nav class="navbar navbar-expand">
       <div class ="container">
         <a href="" class="navbar-logo">SkinLab</a>
@@ -68,22 +67,22 @@
                 <div class="header-text mb-4" id="login-title">
                 <p>Login</p>
                 </div>
-                <form method="POST" action="">
+                <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
                     <div class="header-text mb-1">
                         <p>Username</p>
                         </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control-sm">
+                        <input type="text" name="username" class="form-control-sm">
                     </div>
                     <div class="header-text mb-1">
                         <p>Password</p>
                         </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control-sm">
+                        <input type="password" name="password" class="form-control-sm">
                     </div>
                     <div class="input-group mb-2">
-                        <button><input class ="btn btn-md" type="submit" value="Login" id="login-button"></button>
+                        <button class="btn btn-md" type="submit" id="login-button">Login</button>
                     </div>
                     <div class="row mb-4">
                         <p>Create an Account? <a href ="signup.html">Sign Up</a></p>
@@ -91,8 +90,8 @@
                 </form>
             </div>
             {% for message in messages %}
-            <p id="messages">{{message}}</p>
-        {% endfor %}
+                <p id="messages">{{message}}</p>
+            {% endfor %}
         </div>
     </div>
 </main>

@@ -74,55 +74,56 @@
                     </div>
 
                     <div id="input-container">
-                        <form class="needs-validation" id="form-wrapper" method="post"
+                        <form class="needs-validation" id="form-wrapper" method="post" action=""
                             name="form-wrapper" novalidate>
+                            {% csrf_token %}
                             <div id="step-container">
                                 <div class="step step-1 active">
                                     <h4>1. What are your top skincare concerns? (Select all that apply)</h4>
                                     <div class="input-question">
                                           <div>
-                                                 <input class="form-check-input question__input" id="q1_opt1" name="question1" 
-                                                        type="radio" value="wrinkles"> 
+                                                 <input class="form-check-input question__input" id="q1_opt1" name="skin_concerns" 
+                                                        type="checkbox" value="wrinkles"> 
                                                  <label class="form-check-label question__label" for="q1_opt1">Wrinkles or fine lines</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q1_opt2" name="question1" 
-                                                        type="radio" value="acne"> 
+                                                 <input class="form-check-input question__input" id="q1_opt2" name="skin_concerns" 
+                                                        type="checkbox" value="acne"> 
                                                  <label class="form-check-label question__label" for="q1_opt2">Acne or breakouts</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q1_opt3" name="question1" 
-                                                        type="radio" value="oily"> 
+                                                 <input class="form-check-input question__input" id="q1_opt3" name="skin_concerns" 
+                                                        type="checkbox" value="oily"> 
                                                  <label class="form-check-label question__label" for="q1_opt3">Oiliness</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q1_opt4" name="question1" 
-                                                        type="radio" value="dryness"> 
+                                                 <input class="form-check-input question__input" id="q1_opt4" name="skin_concerns" 
+                                                        type="checkbox" value="dryness"> 
                                                  <label class="form-check-label question__label" for="q1_opt4">Dryness</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q1_opt5" name="question1" 
-                                                        type="radio" value="dark spot"> 
+                                                 <input class="form-check-input question__input" id="q1_opt5" name="skin_concerns" 
+                                                        type="checkbox" value="dark spot"> 
                                                  <label class="form-check-label question__label" for="q1_opt5">Dark spots or hyperpigmentation</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q1_opt6" name="question1" 
-                                                        type="radio" value="redness"> 
+                                                 <input class="form-check-input question__input" id="q1_opt6" name="skin_concerns" 
+                                                        type="checkbox" value="redness"> 
                                                  <label class="form-check-label question__label" for="q1_opt6">Redness or sensitivity</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q1_opt7" name="question1" 
-                                                        type="radio" value="dullness"> 
+                                                 <input class="form-check-input question__input" id="q1_opt7" name="skin_concerns" 
+                                                        type="checkbox" value="dullness"> 
                                                  <label class="form-check-label question__label" for="q1_opt7">Dullness</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q1_opt8" name="question1" 
-                                                        type="radio" value="texture"> 
+                                                 <input class="form-check-input question__input" id="q1_opt8" name="skin_concerns" 
+                                                        type="checkbox" value="texture"> 
                                                  <label class="form-check-label question__label" for="q1_opt8">Uneven texture</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q1_opt9" name="question1" 
-                                                        type="radio" value="scar"> 
+                                                 <input class="form-check-input question__input" id="q1_opt9" name="skin_concerns" 
+                                                        type="checkbox" value="scar"> 
                                                  <label class="form-check-label question__label" for="q1_opt9">Scars or blemish marks</label>
                                           </div>
                                     </div>
@@ -135,24 +136,29 @@
                                     <h4>2. How would you describe your skin type?</h4>
                                     <div class="input-question">
                                           <div>
-                                                 <input class="form-check-input question__input" id="q2_opt1" name="question2" 
+                                                 <input class="form-check-input question__input" id="q2_opt1" name="skin_type" 
                                                         type="radio" value="dry"> 
                                                  <label class="form-check-label question__label" for="q2_opt1">Dry</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q2_opt2" name="question2" 
+                                                 <input class="form-check-input question__input" id="q2_opt2" name="skin_type" 
                                                         type="radio" value="oily"> 
                                                  <label class="form-check-label question__label" for="q2_opt2">Oily</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q2_opt3" name="question2" 
+                                                 <input class="form-check-input question__input" id="q2_opt3" name="skin_type" 
                                                         type="radio" value="combination"> 
                                                  <label class="form-check-label question__label" for="q2_opt3">Combination (oily in some areas, dry in others)</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q2_opt4" name="question2" 
+                                                 <input class="form-check-input question__input" id="q2_opt4" name="skin_type" 
                                                         type="radio" value="normal"> 
                                                  <label class="form-check-label question__label" for="q2_opt4">Normal</label>
+                                          </div>
+                                          <div>
+                                                 <input class="form-check-input question__input" id="q2_opt5" name="skin_type" 
+                                                        type="radio" value="sensitive"> 
+                                                 <label class="form-check-label question__label" for="q2_opt5">Sensitive</label>
                                           </div>
                                     </div>
                                     <div id="input-buttons">
@@ -165,22 +171,22 @@
                                     <h4>3. Which age group are you in?</h4>
                                     <div class="input-question">
                                           <div>
-                                                 <input class="form-check-input question__input" id="q3_opt1" name="question3" 
+                                                 <input class="form-check-input question__input" id="q3_opt1" name="age" 
                                                         type="radio" value="13-24"> 
                                                  <label class="form-check-label question__label" for="q3_opt1">13-24</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q3_opt2" name="question3" 
+                                                 <input class="form-check-input question__input" id="q3_opt2" name="age" 
                                                         type="radio" value="25-34"> 
                                                  <label class="form-check-label question__label" for="q3_opt2">25-34</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q3_opt3" name="question3" 
+                                                 <input class="form-check-input question__input" id="q3_opt3" name="age" 
                                                         type="radio" value="25-49"> 
                                                  <label class="form-check-label question__label" for="q3_opt3">35-49</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q3_opt4" name="question3" 
+                                                 <input class="form-check-input question__input" id="q3_opt4" name="age" 
                                                         type="radio" value="50"> 
                                                  <label class="form-check-label question__label" for="q3_opt4">50+</label>
                                           </div>
@@ -225,18 +231,18 @@
                                    <h4>5. Does your skin feel sensitive or easily irritated by new products?</h4>
                                    <div class="input-question">
                                           <div>
-                                                 <input class="form-check-input question__input" id="q5_opt1" name="question5" 
-                                                        type="radio" value="sensitive"> 
+                                                 <input class="form-check-input question__input" id="q5_opt1" name="sensitivity_adj" 
+                                                        type="radio" value="0.7"> 
                                                  <label class="form-check-label question__label" for="q5_opt1">Yes, often</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q5_opt2" name="question5" 
-                                                        type="radio" value="sensitive"> 
+                                                 <input class="form-check-input question__input" id="q5_opt2" name="sensitivity_adj" 
+                                                        type="radio" value="0.3"> 
                                                  <label class="form-check-label question__label" for="q5_opt2">Occasionally</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q5_opt3" name="question5" 
-                                                        type="radio" value="normal"> 
+                                                 <input class="form-check-input question__input" id="q5_opt3" name="sensitivity_adj" 
+                                                        type="radio" value="0"> 
                                                         <label class="form-check-label question__label" for="q5_opt3">Rarely</label>
                                           </div>
                                    </div>
@@ -250,17 +256,17 @@
                                    <h4>6. How long do you prefer your skincare routine to take?</h4>
                                    <div class="input-question">
                                           <div>
-                                                 <input class="form-check-input question__input" id="q6_opt1" name="question6" 
+                                                 <input class="form-check-input question__input" id="q6_opt1" name="routine_steps" 
                                                         type="radio" value="3"> 
                                                  <label class="form-check-label question__label" for="q6_opt1">As quick as possible (1-3 steps)</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q6_opt2" name="question6" 
+                                                 <input class="form-check-input question__input" id="q6_opt2" name="routine_steps" 
                                                         type="radio" value="5"> 
                                                  <label class="form-check-label question__label" for="q6_opt2">I can spare a few minutes (4-5 steps)</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q6_opt3" name="question6" 
+                                                 <input class="form-check-input question__input" id="q6_opt3" name="routine_steps" 
                                                         type="radio" value="6"> 
                                                  <label class="form-check-label question__label" for="q6_opt3">I enjoy a detailed routine (6+ steps)</label>
                                           </div>
@@ -275,18 +281,18 @@
                                    <h4>7. How often do you wear sunscreen?</h4>
                                    <div class="input-question">
                                           <div>
-                                                 <input class="form-check-input question__input" id="q7_opt1" name="question7" 
-                                                        type="radio" value="dry"> 
+                                                 <input class="form-check-input question__input" id="q7_opt1" name="sun_care_adj" 
+                                                        type="radio" value="0.7"> 
                                                  <label class="form-check-label question__label" for="q7_opt1">Every day, even when indoors</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q7_opt2" name="question7" 
-                                                        type="radio" value="oily"> 
+                                                 <input class="form-check-input question__input" id="q7_opt2" name="sun_care_adj" 
+                                                        type="radio" value="0.3"> 
                                                  <label class="form-check-label question__label" for="q7_opt2">Only on sunny days</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q7_opt3" name="question7" 
-                                                        type="radio" value="combination"> 
+                                                 <input class="form-check-input question__input" id="q7_opt3" name="sun_care_adj" 
+                                                        type="radio" value="0"> 
                                                  <label class="form-check-label question__label" for="q7_opt3">Rarely or never</label>
                                           </div>
                                    </div>
@@ -300,23 +306,23 @@
                                    <h4>8. Do you wear makeup daily?</h4>
                                    <div class="input-question">
                                           <div>
-                                                 <input class="form-check-input question__input" id="q4_opt1" name="question8" 
-                                                        type="radio" value="very"> 
+                                                 <input class="form-check-input question__input" id="q4_opt1" name="makeup_YN" 
+                                                        type="radio" value="Y"> 
                                                  <label class="form-check-label question__label" for="q4_opt1">Yes, a full face daily</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q4_opt2" name="question8" 
-                                                        type="radio" value="light"> 
+                                                 <input class="form-check-input question__input" id="q4_opt2" name="makeup_YN" 
+                                                        type="radio" value="Y"> 
                                                  <label class="form-check-label question__label" for="q4_opt2">Only minimal makeup</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q4_opt3" name="question8" 
-                                                        type="radio" value="light"> 
+                                                 <input class="form-check-input question__input" id="q4_opt3" name="makeup_YN" 
+                                                        type="radio" value="Y"> 
                                                  <label class="form-check-label question__label" for="q4_opt3">Occasionally</label>       
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q4_opt4" name="question8" 
-                                                        type="radio" value="none"> 
+                                                 <input class="form-check-input question__input" id="q4_opt4" name="makeup_YN" 
+                                                        type="radio" value="N"> 
                                                  <label class="form-check-label question__label" for="q4_opt4">Rarely or never</label>
                                           </div>
                                    </div>
@@ -336,13 +342,16 @@
                                    <div id="input-buttons">
                                           <button class="prev-btn" type="button">Previous</button>
                                           <button class="submit-btn" type="submit">Submit</button>
+                                          
                                       </div>
                                </div>
                             
                             </div>
                         </form>
                     </div>
-
+                    {% for message in messages %}
+                            <p id="messages">{{message}}</p>
+                     {% endfor %}       
                 
                 </div>
             </div>
