@@ -48,11 +48,11 @@
           </ul>
 
           <ul class="navbar-nav">
-              <li class="nav-item">
+              <li class="nav-item" id="authentication">
                      {% if request.user.is_authenticated %}
-                         <li><a href="/logout">Logout</a></li>
+                            <li><a href="/logout" style="color: #000000; text-decoration: none;">Logout</a></li>
                      {% else %}
-                         <li><a href="/login">Login</a></li>
+                            <li><a href="/login" style="color: #000000; text-decoration: none;">Login</a></li>
                      {% endif %}
               </li>
           </ul>
@@ -83,48 +83,53 @@
                                     <div class="input-question">
                                           <div>
                                                  <input class="form-check-input question__input" id="q1_opt1" name="skin_concerns" 
-                                                        type="checkbox" value="wrinkles"> 
+                                                        type="checkbox" value="Well-aging"> 
                                                  <label class="form-check-label question__label" for="q1_opt1">Wrinkles or fine lines</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q1_opt2" name="skin_concerns" 
-                                                        type="checkbox" value="acne"> 
+                                                        type="checkbox" value="Acne"> 
                                                  <label class="form-check-label question__label" for="q1_opt2">Acne or breakouts</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q1_opt3" name="skin_concerns" 
-                                                        type="checkbox" value="oily"> 
-                                                 <label class="form-check-label question__label" for="q1_opt3">Oiliness</label>
+                                                        type="checkbox" value="Blackheads"> 
+                                                 <label class="form-check-label question__label" for="q1_opt3">Blackheads</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q1_opt4" name="skin_concerns" 
-                                                        type="checkbox" value="dryness"> 
-                                                 <label class="form-check-label question__label" for="q1_opt4">Dryness</label>
+                                                        type="checkbox" value="Oily"> 
+                                                 <label class="form-check-label question__label" for="q1_opt4">Oiliness</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q1_opt5" name="skin_concerns" 
-                                                        type="checkbox" value="dark spot"> 
-                                                 <label class="form-check-label question__label" for="q1_opt5">Dark spots or hyperpigmentation</label>
+                                                        type="checkbox" value="Dryness"> 
+                                                 <label class="form-check-label question__label" for="q1_opt5">Dryness</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q1_opt6" name="skin_concerns" 
-                                                        type="checkbox" value="redness"> 
-                                                 <label class="form-check-label question__label" for="q1_opt6">Redness or sensitivity</label>
+                                                        type="checkbox" value="Brightening"> 
+                                                 <label class="form-check-label question__label" for="q1_opt6">Dark spots or hyperpigmentation</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q1_opt7" name="skin_concerns" 
-                                                        type="checkbox" value="dullness"> 
-                                                 <label class="form-check-label question__label" for="q1_opt7">Dullness</label>
+                                                        type="checkbox" value="Soothing"> 
+                                                 <label class="form-check-label question__label" for="q1_opt7">Redness or sensitivity</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q1_opt8" name="skin_concerns" 
-                                                        type="checkbox" value="texture"> 
-                                                 <label class="form-check-label question__label" for="q1_opt8">Uneven texture</label>
+                                                        type="checkbox" value="Dullness"> 
+                                                 <label class="form-check-label question__label" for="q1_opt8">Dullness</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q1_opt9" name="skin_concerns" 
-                                                        type="checkbox" value="scar"> 
-                                                 <label class="form-check-label question__label" for="q1_opt9">Scars or blemish marks</label>
+                                                        type="checkbox" value="Stress"> 
+                                                 <label class="form-check-label question__label" for="q1_opt9">Uneven texture</label>
+                                          </div>
+                                          <div>
+                                                 <input class="form-check-input question__input" id="q1_opt10" name="skin_concerns" 
+                                                        type="checkbox" value="Scarring"> 
+                                                 <label class="form-check-label question__label" for="q1_opt10">Scars or blemish marks</label>
                                           </div>
                                     </div>
                                     <div id="input-buttons">
@@ -137,27 +142,27 @@
                                     <div class="input-question">
                                           <div>
                                                  <input class="form-check-input question__input" id="q2_opt1" name="skin_type" 
-                                                        type="radio" value="dry"> 
+                                                        type="radio" value="Dry"> 
                                                  <label class="form-check-label question__label" for="q2_opt1">Dry</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q2_opt2" name="skin_type" 
-                                                        type="radio" value="oily"> 
+                                                        type="radio" value="Oily"> 
                                                  <label class="form-check-label question__label" for="q2_opt2">Oily</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q2_opt3" name="skin_type" 
-                                                        type="radio" value="combination"> 
+                                                        type="radio" value="Combination"> 
                                                  <label class="form-check-label question__label" for="q2_opt3">Combination (oily in some areas, dry in others)</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q2_opt4" name="skin_type" 
-                                                        type="radio" value="normal"> 
+                                                        type="radio" value="Normal"> 
                                                  <label class="form-check-label question__label" for="q2_opt4">Normal</label>
                                           </div>
                                           <div>
                                                  <input class="form-check-input question__input" id="q2_opt5" name="skin_type" 
-                                                        type="radio" value="sensitive"> 
+                                                        type="radio" value="Sensitive"> 
                                                  <label class="form-check-label question__label" for="q2_opt5">Sensitive</label>
                                           </div>
                                     </div>
@@ -201,23 +206,23 @@
                                    <h4>4. 15-30 minutes after washing your face with a cleanser, how does your skin feel?</h4>
                                    <div class="input-question">
                                           <div>
-                                                 <input class="form-check-input question__input" id="q4_opt1" name="question4" 
-                                                        type="radio" value="dry"> 
+                                                 <input class="form-check-input question__input" id="q4_opt1" name="verify_skin_type" 
+                                                        type="radio" value="Dry"> 
                                                  <label class="form-check-label question__label" for="q4_opt1">Tight, dry, or dehydrated</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q4_opt2" name="question4" 
-                                                        type="radio" value="oily"> 
+                                                 <input class="form-check-input question__input" id="q4_opt2" name="verify_skin_type" 
+                                                        type="radio" value="Oily"> 
                                                  <label class="form-check-label question__label" for="q4_opt2">Shiny and oily</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q4_opt3" name="question4" 
-                                                        type="radio" value="combination"> 
+                                                 <input class="form-check-input question__input" id="q4_opt3" name="verify_skin_type" 
+                                                        type="radio" value="Combination"> 
                                                  <label class="form-check-label question__label" for="q4_opt3">Shiny or oily only in certain areas (like the T-zone)</label>
                                           </div>
                                           <div>
-                                                 <input class="form-check-input question__input" id="q4_opt4" name="question4" 
-                                                        type="radio" value="normal"> 
+                                                 <input class="form-check-input question__input" id="q4_opt4" name="verify_skin_type" 
+                                                        type="radio" value="Normal"> 
                                                  <label class="form-check-label question__label" for="q4_opt4">Normal and comfortable</label>
                                           </div>
                                    </div>
@@ -349,10 +354,6 @@
                             </div>
                         </form>
                     </div>
-                    {% for message in messages %}
-                            <p id="messages">{{message}}</p>
-                     {% endfor %}       
-                
                 </div>
             </div>
         </div>

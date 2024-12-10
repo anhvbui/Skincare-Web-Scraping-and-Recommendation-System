@@ -66,11 +66,47 @@ document.addEventListener('DOMContentLoaded', () => {
             return { name: input.name, value: input.value };
         });
         console.log('Final Submission Array:', JSON.stringify(inputData, null, 2));
+        
+        // Send the inputData array to Django to process by using AJAX
+        // ref:  https://medium.com/@munyaokelvin/how-to-fetch-data-from-an-ajax-fetch-api-in-django-e825a329a36d 
+        
+        fetch('/skin-quiz/', {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
+            body: JSON.stringify({'post_data':inputData})
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Success: ',data);
+            })
+            .catch((error) => {
+                console.error('Error: ',error);
+            })
         form.reset();
     });
     
-    // Send the inputData array to Django to process by using AJAX
-    // ref:  https://medium.com/@biswajitpanda973/inserting-data-in-django-via-ajax-without-a-page-refresh-be50e65bd9d2 
+    function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            
+            if (cookie.substring(0,name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+       }
+       var csrftoken = getToken('csrftoken')
+
 
     submitBtn.addEventListener('click', () => {
         window.location.assign('quiz-result.html');
