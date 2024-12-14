@@ -71,84 +71,45 @@
     <div class="row">
         <div class="col-xs-1 col-lg-2" style="background-color: #ffffff;"></div>
 
-        <div class="col-xl" style="background-color: #5c4545;">
-            <h1 class ="text-center" id="result-list-title">Your products recommendation:</h1>
+        <div class="col-xl" id="result-col" style="background-color: #5c4545;">
+            <h1 class ="text-center" id="result-list-title">Your personalized products recommendation:</h1>
+            {% if recommendations %}
+                {% for product in recommendations %}
             <div class="card text-center card-1" id="product-cards" style="width: 50rem;">
-                <div class="card-header">1. Cleanser</div>
+                <div class="card-header">{{forloop.counter}}. {{product.subcategory}}</div>
                 <div class="card-body">
                     <p class="class-title">Product name: </p>
-                    <p class="class-text">Whipped Ddalva Vegan Pack Cleanse</p>
+                    <p class="class-text">{{product.prod_name}}</p>
 
                     <p class="class-title">Brand: </p>
-                    <p class="class-text">Whipped</p>
+                    <p class="class-text">{{product.brand}}</p>
 
                     <p class="class-title">Price: </p>
-                    <p class="class-text">$32.30</p>
+                    <p class="class-text">{{product.price}}</p>
+
+                    <p class="class-title">Reviews: </p>
+                    <p class="class-text">{{product.reviews_no}}</p>
 
                     <p class="class-title">Ingredients: </p>
-                    <p class="class-text">Glycerin, Sodium Cocoyl Isethionate, Water, Coconut Acid, Niacinamide, 1,2-Hexanediol, Cetearyl Alcohol, Coco-Betaine, Myristic Acid, Sodium Isethionate, Stearic Acid, Butylene Glycol, Sodium Methyl Cocoyl Taurate, Sodium Lauroyl Glutamate, Palmitic Acid, Xanthan Gum, Fragaria Ananassa (Strawberry) Fruit Extract, Vanilla Planifolia Fruit Extract, Sodium Hyaluronate, Sodium Ascorbyl Phosphate, Tocopheryl Acetate, Glutathione, Pyridoxine HCl, Polyquaternium-67, Sodium Starch Octenylsuccinate, Calcium Pantothenate, Calendula Officinalis Extract, Sodium Chloride, Ceramide NP, Maltodextrin, Hydrogenated Lecithin, Silica, Dextrin, Gardenia Florida Fruit Extract, Sodium Acetate, Fragrance, Citrus Aurantium Dulcis (Orange) Peel Oil, Citrus Limon (Lemon) Peel Oil, Benzyl Benzoate, Limonene</p>
+                    <p class="class-text">{{product.ingredients}}</p>
+
+                    <p class="class-title">Where to Buy: </p>
+                    <p class="class-text">{{product.link}}</p>
                 </div>
             </div>
-
-            <div class="card text-center card-2" id="product-cards" style="width: 50rem;">
-                <div class="card-header">2. Serum</div>
-                <div class="card-body">
-                    <p class="class-title">Product name: </p>
-                    <p class="class-text">COSRX The 6 Peptide Skin Booster Serum</p>
-
-                    <p class="class-title">Brand: </p>
-                    <p class="class-text">COSRX</p>
-
-                    <p class="class-title">Price: </p>
-                    <p class="class-text">$31.50</p>
-
-                    <p class="class-title">Ingredients: </p>
-                    <p class="class-text">Water, Dipropylene Glycol, Glycerin, Pentylene Glycol, 1,2-Hexanediol, Niacinamide, Acetyl Hexapeptide-8 (5 ppm), 
-                                        Copper Tripeptide-1 (5 ppm), sh-Polypeptide-121 (1.98ppm), Dipeptide Diaminobutyroyl Benzylamide Diacetate (0.3 ppm), Oligopeptide-68 (0.095ppm), 
-                                        Palmitoyl Tripeptide-8 (0.02ppm), Allantoin, Sodium Hyaluronate, Acetyl Glucosamine, Serine, Alanine, Glycine, Threonine, Arginine, Proline, 
-                                        Betaine, Sodium PCA, Sodium Lactate, PCA, Glutamic Acid, Lysine HCl, Tocopherol, Dextran, Glycine Soja (Soybean) Oil, Hydrogenated Lecithin, 
-                                        Ammonium Acryloyldimethyltaurate/VP Copolymer/ Polyacrylate Crosspolymer-6, Butylene Glycol, Xanthan Gum, Ethylhexylglycerin, Adenosine, 
-                                        Polyquaternium-51, Disodium EDTA, Citric Acid, Caprylyl Glycol, t-Butyl Alcohol, Potassium Sorbate, Sodium Oleate</p>
-                </div>
-            </div>
-
-            <div class="card text-center card-3" id="product-cards" style="width: 50rem;">
-                <div class="card-header">3. Moisturizer</div>
-                <div class="card-body">
-                    <p class="class-title">Product name: </p>
-                    <p class="class-text">Centellian24 Madeca Cream Time Reverse</p>
-
-                    <p class="class-title">Brand: </p>
-                    <p class="class-text">Centellian24</p>
-
-                    <p class="class-title">Price: </p>
-                    <p class="class-text">$45.90</p>
-
-                    <p class="class-title">Ingredients: </p>
-                    <p class="class-text">Water*, Dipropylene Glycol*, Hydrogenated Polydecene, Caprylic/Capric Triglyceride, Glycerin, Glyceryl Stearate, Pentaerythrityl Tetraethylhexanoate, 
-                                        Niacinamide*, Cyclohexasiloxane, Cetyl Alcohol, Polyglyceryl-6 Distearate, Vinyl Dimethicone, Dicaprylyl Ether, Centella Asiatica Protein Extract, 
-                                        Asiaticoside*, Asiatic Acid*, Madecassic Acid (4,800 ppm)*, Centella Asiatica Oil, Centella Asiatica Amino Acid, Madecassoside, Ascorbyl Asiatate, 
-                                        Centella Asiatica Polypeptide, Hydrolyzed Hyaluronic Acid, Hydrolyzed Centella Asiatica Extract, Centella Asiatica Extract, Centella Asiatica Leaf Extract*, 
-                                        Cimicifuga Racemosa Root Extract*, Silybum Marianum Extract*, Lepidium Meyenii Root Extract*, Macadamia Ternifolia Seed Oil*, Glycine Soja (Soybean) Oil*, 
-                                        Hydrogenated Lecithin*, Sodium Hyaluronate, Polyglyceryl-10 Laurate, Stearyl Alcohol, Beeswax, Sodium Stearoyl Glutamate, Panthenol, Xylitylglucoside*, 
-                                        Hydroxyethyl Acrylate/Sodium Acryloyldimethyl Taurate Copolymer, Jojoba Esters*, Anhydroxylitol*, Butylene Glycol*, Polyglyceryl-3 Beeswax, 
-                                        1,2-Hexanediol*, Hydroxyacetophenone, Xylitol*, Methylpropanediol*, Allantoin, Propanediol*, Candida Bombicola/Glucose/Methyl Rapeseedate Ferment*, 
-                                        Xanthan Gum, Ethoxydiglycol*, Disodium EDTA, Glucose*, Adenosine, Sorbitan Isostearate, Ethylhexylglycerin, Sodium Laurate, Cyclodextrin*, Lauric Acid, 
-                                        Sodium Polyacrylate, PVM/MA Copolymer, Octyldodecanol*, Glycolipids*, Caffeine*, C12-13 Pareth-9*, Collagen Amino Acids, Ceramide NP, Resveratrol*, 
-                                        Arginine*, Glycogen, Ectoin, Taurine*, Hydrolyzed Elastin, Retinol*, Maltodextrin*, Phytosphingosine, Sucrose Distearate*, Sodium DNA, Cyanocobalamin*, 
-                                        Glycine, Glutamic Acid, Helianthus Annuus (Sunflower) Seed Wax*, Polyglycerin-3*, Tocopherol*, Artemisia Absinthium Extract, Vanilla Planifolia Fruit Extract, 
-                                        Olea Europaea (Olive) Fruit Oil, Citrus Aurantium Dulcis (Orange) Oil, Citrus Nobilis (Mandarin Orange) Peel Oil, Lavandula Angustifolia (Lavender) Oil, 
-                                        Citrus Aurantium Bergamia (Bergamot) Fruit Oil, Rosmarinus Officinalis (Rosemary) Leaf Oil, Citrus Aurantium Dulcis (Orange) Peel Oil, Litsea Cubeba Fruit Oil, 
-                                        Juniperus Virginiana Oil, Citrus Grandis (Grapefruit) Peel Oil, Cedrus Atlantica Bark Oil, Pelargonium Graveolens Flower Oil, 
-                                        Jasminum Officinale (Jasmine) Flower Water, Myrtus Communis Oil, Rose Flower Oil, Ferula Galbaniflua (Galbanum) Resin Oil, Copaifera Officinalis (Balsam Copaiba) Resin, 
-                                        Limonene, Linalool, Citral (*Active-TECAâ„¢)</p>
-                </div>
-            </div>
-            
+                {% endfor %}
+            {% else %}
+                <div class="card-header">No recommendations available.</div>
+            {% endif %}
             <div class="result-page-end">
                 <p>Click here to save this product list <button class="save-btn" type="submit">Save</button></p>
             </div>
             
+            <div id="save-confirmation">
+                <p style="color: #4CAF50; font-weight: bold;">List saved!</p>
+                <a href="/user/account" class="btn btn-primary">Go to Your Account</a>
+            </div>
+
         </div>
 
         <div class="col-xs-1 col-lg-2" style="background-color: #ffffff;"></div>

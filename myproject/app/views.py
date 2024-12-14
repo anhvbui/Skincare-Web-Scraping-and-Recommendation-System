@@ -7,12 +7,13 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.sessions.models import Session
 from django.http import JsonResponse
+import pandas as pd
 
 from .models import TestUser
 from .forms import CreateUserForm
 
 import json
-
+from app.utilities import product_recommender
 
 # Create your views here.
 def homepage(request):
@@ -87,20 +88,27 @@ def skinQuiz(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
-            #print(f"JS Original fetched data: {data}")
+            print(f"JS Original fetched data: {data}")
             user_data = data.get('post_data', [])
-            to_be_processed = skin_concern_weight(user_data)
-            #print(f"User Data: {user_data}")  # Debugging to see the output of the function
-            processed_data = assign_att_score(to_be_processed, request)
-            messages.success(request, "User Information Submitted.")
-            return redirect(reverse('quiz-result'))
+            print(f"Post data from Js: {user_data}")
+            #to_be_processed = skin_concern_weight(user_data)
+            #print(f"To be processed: {to_be_processed}")  # Debugging to see the output of the function
+            processed_data = assign_att_score(user_data, request)
+            print(f"Processed: {processed_data}")
+            request.session['processed_user_data'] = processed_data
+            #print("Session temporarily stored data:", request.session['processed_user_data'])
+            #messages.success(request, "User Information Submitted.")
+            redirect_url = reverse('quiz-result')  # URL for the redirect
+            return JsonResponse({'status': 'success', 'redirect_url': redirect_url})
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON format'}, status=400)
         except Exception as e:
             # Catch any other errors
+            print(f"Error encountered: {e}")  # Add this line
             return JsonResponse({'error': str(e)}, status=450)
     else:
         return render(request, "skin-quiz.html", context)
+
 
 def assign_att_score(to_be_processed, request):
     user_input = {
@@ -145,6 +153,8 @@ def assign_att_score(to_be_processed, request):
 
     print(f"Original sensitivity score: {user_input['Soothing']}")
     print(f"Original sun care score: {user_input['Sun Care']}")
+    print(f"Original dryness score: {user_input['Dry']}")
+    
     # Make final adjusments based on user input
     for item in to_be_processed:
         if item['name'] == 'sensitivity_adj':
@@ -153,9 +163,13 @@ def assign_att_score(to_be_processed, request):
         if item['name'] == 'sun_care_adj':
             user_input['Sun Care'] += float(item['value'])
             print(f"Updated sun care score: {user_input['Sun Care']}")
+        if item['name'] == 'Dryness':
+            user_input['Dry'] += 0.3
+            print(f"Updated sun care score: {user_input['Dry']}")
+        
             
             
-    print(f"User input to feed to Google Colab later: {user_input}")
+    print(f"User input to feed to product recommender: {user_input}")
     return user_input
 
 
@@ -168,6 +182,7 @@ def skin_concern_weight(to_be_processed):
             'Sun Care': 0,
             'Moisturising': 0,
             'Dullness': 0,
+            'Dryness': 0,
             'Soothing': 0,
             'Stress': 0,     # same as sensitivity
             'Visible Pores': 0, # same as blackheads
@@ -175,6 +190,7 @@ def skin_concern_weight(to_be_processed):
             'Sculpting': 0,        # same as well-aging
             'Puffiness': 0,
             'Scarring': 0,
+            'Oily': 0
             }
     
     # Iterate over the incoming data to collect values for 'skin_concerns'
@@ -186,17 +202,20 @@ def skin_concern_weight(to_be_processed):
     else: 0
     
     for item in selected_concerns:
-        skin_concerns[item] = dist_weight
+        if item in skin_concerns:
+            skin_concerns[item] = dist_weight
+        else:
+            dist_weight = 0
+            print(f"Warning: {item} not found in skin_concerns.")
 
     return skin_concerns
 
 def skin_type_weight(to_be_processed):
     skin_types = {
-            'Dry': None,
-            'Sensitive': None,
-            'Oily': None,
-            'Combination': None,}
-    skin_types = {key: 0 for key in skin_types.values()}
+            'Dry': 0,
+            'Sensitive': 0,
+            'Oily': 0,
+            'Combination': 0,}
 
     for item in to_be_processed:
         if item['name'] == 'skin_type':  
@@ -211,8 +230,69 @@ def skin_type_weight(to_be_processed):
 #def user_data_model():
 
 
-
 @login_required(login_url='login')
 def quizResult(request):
     context = {}
+    finalized_user_data = request.session.get('processed_user_data', None)
+    print(f"Session data retrieved:{finalized_user_data}")
+
+    """
+    # test
+    context['recommendations'] = [
+    {'prod_name': 'Alice', 'brand': 'Cosrx', 'price': 25.00, 'category': 'moisturizer', 'subcategory': 'cream', 'rating': 4.8, 'reviews_no': 346, 'link': 'www.google.com'},
+    {'prod_name': 'Bob', 'brand': 'Laneige', 'price': 46.00, 'category': 'cleanser', 'subcategory': 'cleansing oil', 'rating': 4.8, 'reviews_no': 89, 'link': 'www.google.com'},
+    {'prod_name': 'Dan', 'brand': 'Aestura', 'price': 7.50, 'category': 'serum', 'subcategory': 'serum', 'rating': 4.8, 'reviews_no': 2083, 'link': 'www.google.com'},
+    {'prod_name': 'Lily', 'brand': 'Dr.G', 'price': 19.00, 'category': 'sunscreen', 'subcategory': '', 'rating': 4.8, 'reviews_no': 239, 'link': 'www.google.com'}
+    ]
+
     return render(request,"quiz-result.html", context)
+    """
+
+    user_df = product_recommender.load_user_data()
+    product_df = product_recommender.load_product_data()
+    if finalized_user_data is not None:
+        user_submission = finalized_user_data
+        print("Verify user submission: ", user_submission)
+        id = user_submission['user_id']
+        user_submission_df = pd.DataFrame([user_submission])
+        print(user_submission_df.shape[0])
+        product_recs = product_recommender.generate_recommendations(id, user_df, product_df, user_submission_df)
+        print(f"Row count of product recommendation DF: {product_recs.shape[0]}")
+        if not product_recs.empty:
+            user_routine_steps = user_submission['routine_steps']
+            prod_list = []
+            df_cleansing_oil = product_recs[(product_recs['category'] == 'Cleansers') & (product_recs['subcategory'] == 'Cleansing Oil')]
+            df_cleansing_foam = product_recs[(product_recs['category'] == 'Cleansers') & (product_recs['subcategory'] == 'Cleansing Foam')]
+            df_toner = product_recs[(product_recs['category'] == 'Moisturizers') & (product_recs['subcategory'] == 'Toner')]
+            df_serum = product_recs[(product_recs['category'] == 'Moisturizers') & (product_recs['subcategory'] == 'Essence & Serum')]
+            df_moisturizer = product_recs[(product_recs['category'] == 'Moisturizers') & ((product_recs['subcategory'] == 'Moisturizer') | (product_recs['subcategory'] == 'Cream'))]
+            df_sunscreen = product_recs[(product_recs['category'] == 'Sunscreen')]
+
+            if user_routine_steps <= 3:
+                print("User routine step is 3.")
+                prod_list.append(df_cleansing_foam.head(1).to_dict(orient='records'))
+                prod_list.append(df_moisturizer.head(1).to_dict(orient='records'))
+                prod_list.append(df_sunscreen.head(1).to_dict(orient='records'))
+            elif user_routine_steps > 3 and user_routine_steps <= 5:
+                print("User routine step is 4.")
+                prod_list.append(df_cleansing_foam.head(1).to_dict(orient='records'))
+                prod_list.append(df_serum.head(1).to_dict(orient='records'))
+                prod_list.append(df_moisturizer.head(1).to_dict(orient='records'))
+                prod_list.append(df_sunscreen.head(1).to_dict(orient='records'))
+            elif user_routine_steps > 5:
+                print("User routine step is 6.")
+                prod_list.append(df_cleansing_oil.head(1).to_dict(orient='records'))
+                prod_list.append(df_cleansing_foam.head(1).to_dict(orient='records'))
+                prod_list.append(df_toner.head(1).to_dict(orient='records'))
+                prod_list.append(df_serum.head(1).to_dict(orient='records'))
+                prod_list.append(df_moisturizer.head(1).to_dict(orient='records'))
+                prod_list.append(df_sunscreen.head(1).to_dict(orient='records'))
+            
+            #top_10_recs = product_recs.head(10).to_dict(orient='records')
+            #print(f"Product recs: {prod_list}")
+            flat_prod_list = [item for sublist in prod_list for item in sublist]
+            context['recommendations'] = flat_prod_list
+            print(f"Test context: {context}")
+    return render(request,"quiz-result.html", context)
+
+

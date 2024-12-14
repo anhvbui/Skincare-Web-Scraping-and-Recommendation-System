@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const previousBtn = document.querySelectorAll('.prev-btn');
     const steps = Array.from(document.querySelectorAll('.step'));
     const submitBtn = document.querySelector('.submit-btn')
+    const saveBtn = document.querySelector('.save-btn')
     const form = document.querySelector('#form-wrapper');
     const totalStep = 8;
 
@@ -67,29 +68,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         console.log('Final Submission Array:', JSON.stringify(inputData, null, 2));
         
-        // Send the inputData array to Django to process by using AJAX
+        // Send the inputData array to Django to process by using AJAX Fetch API
         // ref:  https://medium.com/@munyaokelvin/how-to-fetch-data-from-an-ajax-fetch-api-in-django-e825a329a36d 
         
         fetch('/skin-quiz/', {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json',
-                'X-CSRFToken':csrftoken,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
             },
-            body: JSON.stringify({'post_data':inputData})
-            })
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                console.log('Success: ',data);
-            })
-            .catch((error) => {
-                console.error('Error: ',error);
-            })
-        form.reset();
+            body: JSON.stringify({'post_data': inputData})
+        })
+        .then((response) => {
+            console.log('Response:', response);  // Log the response object
+        
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            return response.text();  // Get the response as text
+        })
+        .then((text) => {
+            console.log('Response Text:', text);  // Log the raw text response
+            try {
+                const data = JSON.parse(text);  // Attempt to parse the text as JSON
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
+                }
+            } catch (error) {
+                console.error('JSON parse error:', error);  // Handle any parsing issues
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     });
-    
+
+
     function getToken(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie != '') {
@@ -107,9 +121,23 @@ document.addEventListener('DOMContentLoaded', () => {
        }
        var csrftoken = getToken('csrftoken')
 
+    //function saveList() {
+        // Perform save action (e.g., sending data to the server via AJAX)
+        // Simulating save action for this example
+        //setTimeout(() => {
+            // Show the confirmation message and button
+            //document.getElementById('save-confirmation').style.display = 'block';
+            // Optionally, disable the save button to prevent multiple clicks
+            //document.querySelector('.save-btn').disabled = true;
+        //}, 500); // Simulate a short delay for saving
+    //}
 
-    submitBtn.addEventListener('click', () => {
-        window.location.assign('quiz-result.html');
+    saveBtn.addEventListener('click', (event) => {
+        console.log('Save button is clicked.');
+        document.getElementById('save-confirmation').style.display = 'block';
+        document.querySelector(saveBtn).disabled = true;
     })
-    
+
+
+
 });

@@ -38,6 +38,6 @@ urlpatterns = [
     path('test/', test, name = "test"),
     path('skin-quiz/', skinQuiz, name = "skin-quiz"),
     path('quiz-result/', quizResult, name = "quiz-result"),
-    path('skin-quiz/quiz-result.html', quizResult, name='quiz-result'),
+    #path('skin-quiz/quiz-result.html', quizResult, name='quiz-result'),
     re_path(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
 ]

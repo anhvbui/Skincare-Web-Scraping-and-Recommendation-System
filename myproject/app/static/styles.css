@@ -203,8 +203,16 @@ main{
 .result-page{
     font-family: Jura;
 }
+
 #result-container{
     color: white;
+}
+
+#result-col{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #result-list-title{
@@ -213,16 +221,17 @@ main{
 
 #product-cards{
     background-color: #5c4545;
+    margin: 10px;
+    align-items: center;
 }
 
 .card {
-    margin-top: 50px;
+    margin-top: 25px;
     margin-bottom: 20px;
     width: auto;
-    position: absolute;
-    top: 15%;
-    left: 50%;
+    position: relative;
     transform: translate(-50%, -50%);
+    overflow: visible;
 }
 
 .card-header {
@@ -235,15 +244,27 @@ main{
     font-weight: bold !important;
 }
 
+.card-body {
+    max-height: none; 
+}
+
 .result-page-end{
     position: relative;
     margin-left: 400px;
+    margin-top: 30px;
 }
+
+#save-confirmation{
+    display: none; 
+    text-align: center; 
+    margin-top: 20px;
+}
+
 .save-btn{
     background-color: #ffffff;
     padding: 5px 35px;
     border: 1px solid black;
-    margin-top: 15px;
+    margin-top: 30px;
     margin-bottom: 10px;
     margin-left: 20px;
     width: 150px;

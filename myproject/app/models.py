@@ -37,3 +37,19 @@ class UserInput(models.Model):
     sensitive = models.FloatField()
     normal = models.FloatField()
 
+
+class ProductData(models.Model):
+    brand_name = models.TextField()
+    prod_name = models.TextField()
+    price = models.FloatField()
+    rating = models.FloatField()
+    category = models.TextField()
+    subcategory = models.TextField()
+    ingredients = models.TextField()
+    review_no = models.IntegerField()
+    link = models.TextField()
+
+class ProductReviewData(models.Model):
+    prod_name = models.TextField()
+    user_skin_type = models.JSONField()
+    user_skin_concerns = models.JSONField()
