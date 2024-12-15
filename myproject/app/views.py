@@ -6,10 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.sessions.models import Session
+from django.db import connection
 from django.http import JsonResponse
 import pandas as pd
 
 from .models import TestUser
+from .models import SavedProduct
 from .forms import CreateUserForm
 
 import json
@@ -292,7 +294,71 @@ def quizResult(request):
             #print(f"Product recs: {prod_list}")
             flat_prod_list = [item for sublist in prod_list for item in sublist]
             context['recommendations'] = flat_prod_list
-            print(f"Test context: {context}")
+            #print(f"Test context: {context}")
+
+            request.session['products_data'] = flat_prod_list
+        if request.method =="POST":
+            products_to_save = request.session.get('products_data', [])
+
+            if products_to_save:
+                if request.user.is_authenticated:
+                    for product in products_to_save: 
+                        prod_name = product.get('prod_name')
+                        brand = product.get('brand')
+                        price = product.get('price')
+                        category = product.get('category')
+                        subcategory = product.get('subcategory')
+                        rating = product.get('rating')
+                        reviews_no = product.get('reviews_no')
+                        link = product.get('link')
+
+                        # Save product to database
+                        SavedProduct.objects.create(
+                            user=request.user,
+                            prod_name=prod_name,
+                            brand=brand,
+                            category=category,
+                            subcategory=subcategory,
+                            link=link
+                        )
+                        print(f"Saved products: {prod_name}")
+                else: print("User is not authenticated.")
+            # Clear the session data after saving
+            del request.session['products_data']
+
     return render(request,"quiz-result.html", context)
 
 
+def savedItems(request):
+    context = {}
+    if request.user.is_authenticated:
+        user_id = request.user.id
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT id, prod_name, category, subcategory, brand, link, 
+                       DATE_TRUNC('minute', created_at) AS created_at_minute
+                FROM app_savedproduct
+                WHERE user_id = %s
+                GROUP BY id, created_at_minute, prod_name, category, subcategory, brand, link
+                ORDER BY created_at_minute DESC
+            """, [user_id])
+            rows = cursor.fetchall()
+        
+        # Process rows into a dictionary or directly pass to the context
+        saved_products = [
+            {
+                'id': row[0],
+                'prod_name': row[1],
+                'category': row[2],
+                'subcategory': row[3],
+                'brand': row[4],
+                'link': row[5],
+                'created_at_minute': row[6]
+            }
+            for row in rows
+        ]
+        context['saved_products'] = saved_products
+    else:
+        context['error_message'] = "You need to log in to view saved items."
+    
+    return render(request, "saved-items.html", context)

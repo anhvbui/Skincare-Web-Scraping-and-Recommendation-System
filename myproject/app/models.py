@@ -53,3 +53,13 @@ class ProductReviewData(models.Model):
     prod_name = models.TextField()
     user_skin_type = models.JSONField()
     user_skin_concerns = models.JSONField()
+
+
+class SavedProduct(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    prod_name = models.TextField()
+    category = models.TextField()
+    subcategory = models.TextField()
+    brand = models.TextField()
+    link = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

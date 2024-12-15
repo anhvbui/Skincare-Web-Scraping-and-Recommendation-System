@@ -27,6 +27,7 @@ from app.views import test
 from app.views import logoutPage
 from app.views import skinQuiz
 from app.views import quizResult
+from app.views import savedItems
 
 
 urlpatterns = [
@@ -38,6 +39,7 @@ urlpatterns = [
     path('test/', test, name = "test"),
     path('skin-quiz/', skinQuiz, name = "skin-quiz"),
     path('quiz-result/', quizResult, name = "quiz-result"),
+    path('saved-items/', savedItems, name = "saved-items"),
     #path('skin-quiz/quiz-result.html', quizResult, name='quiz-result'),
     re_path(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
 ]
