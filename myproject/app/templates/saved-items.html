@@ -76,23 +76,23 @@
                 <h2 class ="text-center" id="result-list-title">My Saved Products</h2>
                 {% if saved_products %}
                     {% for product in saved_products %}
-                    <div class="card text-center card-1" id="saved-product-cards" style="width: 50rem;">
+                    <div class="card text-center prod-card" id="saved-product-cards" style="width: 50rem;">
                         <div class="saved-card-body">
-                            <p class="class-title">Product name: </p>
-                            <p class="class-text">{{product.prod_name}}</p>
+                            <span class="class-title">Product name: </span>
+                            <span class="class-text">{{product.prod_name}}</span><br>
 
-                            <p class="class-title">Brand: </p>
-                            <p class="class-text">{{product.brand}}</p>
+                            <span class="class-title">Brand: </span>
+                            <span class="class-text">{{product.brand}}</span><br>
 
-                            <p class="class-title">Category: </p>
-                            <p class="class-text">{{product.subcategory}}</p>
+                            <span class="class-title">Category: </span>
+                            <span class="class-text">{{product.subcategory}}</span><br>
 
-                            <p class="class-title">Where to Buy: </p>
-                            <p class="class-text">
-                                <a href="{{product.link}}" target="_blank" style="color: rgb(255, 255, 255)">{{ product.link }}</a></p>
+                            <span class="class-title">Where to Buy: </span>
+                            <span class="class-text">
+                                <a href="{{product.link}}" target="_blank" style="color: rgb(255, 255, 255)">{{ product.link }}</a></span><br>
 
-                            <p class="class-title">Saved on: </p>
-                            <p class="class-text">{{product.created_at_minute}}</p>
+                            <span class="class-title">Saved on: </span>
+                            <span class="class-text">{{product.created_at_minute}}</span><br>
                         </div>
                     </div>
                     {% endfor %}

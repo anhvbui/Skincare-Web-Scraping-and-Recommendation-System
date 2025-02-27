@@ -297,6 +297,7 @@ def quizResult(request):
             #print(f"Test context: {context}")
 
             request.session['products_data'] = flat_prod_list
+
         if request.method =="POST":
             products_to_save = request.session.get('products_data', [])
 
@@ -322,10 +323,12 @@ def quizResult(request):
                             link=link
                         )
                         print(f"Saved products: {prod_name}")
+                
                 else: print("User is not authenticated.")
+                return redirect('saved-items')
             # Clear the session data after saving
             del request.session['products_data']
-
+        
     return render(request,"quiz-result.html", context)
 
 

@@ -79,24 +79,24 @@
                     <div class="card text-center card-1" id="product-cards" style="width: 50rem;">
                         <div class="card-header">{{forloop.counter}}. {{product.subcategory}}</div>
                         <div class="card-body">
-                            <p class="class-title">Product name: </p>
-                            <p class="class-text">{{product.prod_name}}</p>
+                            <span class="class-title">Product name: </span>
+                            <span class="class-text">{{product.prod_name}}</span><br>
 
-                            <p class="class-title">Brand: </p>
-                            <p class="class-text">{{product.brand}}</p>
+                            <span class="class-title">Brand: </span>
+                            <span class="class-text">{{product.brand}}</span><br>
 
-                            <p class="class-title">Price: </p>
-                            <p class="class-text">$ {{product.price}}</p>
+                            <span class="class-title">Price: </span>
+                            <span class="class-text">$ {{product.price}}</span><br>
 
-                            <p class="class-title">Reviews: </p>
-                            <p class="class-text">{{product.reviews_no}}</p>
+                            <span class="class-title">Reviews: </span>
+                            <span class="class-text">{{product.reviews_no}}</span><br>
 
-                            <p class="class-title">Ingredients: </p>
-                            <p class="class-text">{{product.ingredients}}</p>
+                            <span class="class-title">Ingredients: </span>
+                            <span class="class-text">{{product.ingredients}}</span><br>
 
-                            <p class="class-title">Where to Buy: </p>
-                            <p class="class-text">
-                                <a href="{{product.link}}" target="_blank" style="color: rgb(255, 255, 255)">{{ product.link }}</a></p>
+                            <span class="class-title">Where to Buy: </span>
+                            <span class="class-text">
+                                <a href="{{product.link}}" target="_blank" style="color: rgb(255, 255, 255)">{{ product.link }}</a></span><br>
                         </div>
                     </div>
                     {% endfor %}

@@ -289,7 +289,16 @@ main{
     text-align: left !important;
 }
 
+.saved-card-body .class-title {
+    font-weight: bold;
+}
 .saved-card-body {
     text-align: left;
-    max-height: none; 
+    margin-left: 15px;
+    max-height: none;
+}
+
+#saved-product-cards{
+    background-color: #5c4545;
+    margin: 20px;
 }
